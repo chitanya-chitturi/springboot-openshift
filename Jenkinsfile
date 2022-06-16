@@ -12,9 +12,6 @@ pipeline {
                 openshift.withProject() {
              if (openshift.selector("bc", "springboot-apps").exists()) { 
                     echo "build is available"
-                    sh '''
-                    
-                    '''
                   }
             else{
                 echo "build is not available"
