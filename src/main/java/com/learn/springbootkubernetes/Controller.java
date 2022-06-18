@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class Controller {
     @RequestMapping("/")
     public String index() {
-        return "Hello Spring-Boot app successfully deployed and running on Minishift";
+        return "Hello Spring-Boot app successfully deployed and running on RedHat OpenShift";
     }
 }
