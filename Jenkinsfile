@@ -30,6 +30,7 @@ pipeline {
                 echo "build is not available"
                 sh '''
                 oc new-app --name ${APP_NAME} -e MAVEN_MIRROR_URL=${NEXUS_SERVER} java:openjdk-11-el7~${APP_GIT_URL}
+                 oc expose svc/${APP_NAME}
            '''
             }          
           }
