@@ -11,8 +11,19 @@ pipeline {
         APP_NAME = "spring-app"
     }
   stages {
+      //First scan with Sonarqube
+      stage('Scaning with Sonarqube') {
+      steps { 
+          withSonarQubeEnv('SQ'){
+               git url: "https://github.com/mahsankhaan/springboot-openshift.git", branch: "master"
+                sh'''
+         mvn clean package sonar:sonar
+         '''
+          }
+      }
+    }
       //if build is already available start a new build else create a new application
-    stage('Create application') {
+    stage('Create and build application') {
       steps { 
           script{
         git url: "https://github.com/mahsankhaan/springboot-openshift.git", branch: "master"
@@ -30,7 +41,6 @@ pipeline {
                 echo "build is not available"
                 sh '''
                 oc new-app --name ${APP_NAME} -e MAVEN_MIRROR_URL=${NEXUS_SERVER} java:openjdk-11-el7~${APP_GIT_URL}
-                 oc expose svc/${APP_NAME}
            '''
             }          
           }
