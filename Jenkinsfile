@@ -23,7 +23,7 @@ pipeline {
                 openshift.withProject() {
              if (openshift.selector("bc", "${APP_NAME}").exists()) { 
                     echo "build is available"
-               sh'''     oc start-build  ${APP_NAME} --from-dir=. --follow --wait  -e MAVEN_MIRROR_URL=${NEXUS_SERVER}
+               sh'''     oc start-build  ${APP_NAME} --from-dir=. --follow --wait  --e=MAVEN_MIRROR_URL=${NEXUS_SERVER}
                '''
                   }
             else{
