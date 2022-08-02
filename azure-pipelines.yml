@@ -20,6 +20,7 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
+    
     - task: Maven@3
       inputs:
         mavenPomFile: 'pom.xml'
